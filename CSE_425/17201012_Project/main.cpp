@@ -1,9 +1,3 @@
-/*
-Rashik Rahman
-17201012
-User Manual in ReadMe.txt
-*/
-
 #include<windows.h>
 #include<bits/stdc++.h>
 #include <GL/glut.h>
@@ -48,28 +42,55 @@ static void display(void)
             glRotated(a,0,0,1);
         }
 
-    //glutSolidSphere(1,slices,stacks);
-    glutSolidTorus(0.2,0.8,slices,stacks);
-    //glutSolidCone(1,1,slices,stacks);
+    glutSolidCone(1,1,slices,stacks);
+
     glPopMatrix();
 
     //Color for the object
-    GLfloat diffColors[5][4] = {{0.5, 0.5, 0.9, 1.0},
-                                 {0.9, 0.5, 0.5, 1.0},
+    GLfloat diffColors[5][4] = {{0.9, 0.5, 0.5, 1.0},
+                                {0.9, 0.7, 0.2, 1.0},
+                                {0.5, 0.5, 0.9, 1.0},
                                  {0.5, 0.9, 0.3, 1.0},
-                                 {0.9, 0.7, 0.2, 1.0},
                                  {0.3, 0.8, 0.9, 1.0}};
+
+     GLfloat diffColors2[35][4] = {{0.1, 0, 0, 1.0},
+                                 {0.2, 0, 0, 1.0},
+                                 {0.3, 0, 0, 1.0},
+                                 {0.4, 0, 0, 1.0},
+                                 {0.5, 0, 0, 1.0},
+                                 {0.6, 0, 0, 1.0},
+                                 {0.7, 0, 0, 1.0},
+                                 {0.8, 0, 0, 1.0},
+                                 {0.9, 0, 0, 1.0},
+                                 {0.8, 0.1, 0, 1.0},
+                                 {0.6, 0.1, 0, 1.0},
+                                 {0.4, 0.1, 0, 1.0},
+                                 {0.2, 0.2, 0, 1.0},
+                                 {0, 0.3, 0, 1.0},
+                                 {0, 0.4, 0, 1.0},
+                                 {0, 0.5, 0, 1.0},
+                                 {0, 0.6, 0, 1.0},
+                                 {0, 0.7, 0, 1.0},
+                                 {0, 0.8, 0, 1.0},
+                                 {0, 0.9, 0, 1.0},
+                                 {0, 0.8, 0, 1.0},
+                                 {0, 0.6, 0.1, 1.0},
+                                 {0, 0.4, 0.1, 1.0},
+                                 {0, 0.3, 0.1, 1.0},
+                                 {0, 0.2, 0.1, 1.0},
+                                 {0, 0, 0.2, 1.0},
+                                 {0, 0, 0.3, 1.0},
+                                 {0, 0, 0.4, 1.0},
+                                 {0, 0, 0.5, 1.0},
+                                 {0, 0, 0.6, 1.0},
+                                 {0, 0, 0.7, 1.0},
+                                 {0, 0, 0.8, 1.0},
+                                 {0, 0, 0.9, 1.0},
+                                 {0, 0, 1, 1.0}};
 
     if(smotoh_color_transition_lock==1) //If auto color transition enabled
     {
-
-            glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, diffColors[colorCounter]);
-            colorCounter+=1;
-            if(colorCounter==5)
-                colorCounter=0;
-            Sleep(500);
-
-
+        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, diffColors2[colorCounter]);
     }
 
     else
@@ -117,16 +138,18 @@ static void key(unsigned char key, int x, int y)
             break;
 
         case 'c': //Color toggle
+            smotoh_color_transition_lock=0;
             colorCounter += 1;
             if(colorCounter>5)
                 colorCounter=0;
             break;
 
         case 't': //Enable/Disable smooth color transition
-            if(smotoh_color_transition_lock==0)
-                smotoh_color_transition_lock=1;
-            else
-                smotoh_color_transition_lock=0;
+
+            smotoh_color_transition_lock=1;
+            colorCounter += 1;
+            if(colorCounter>35)
+                colorCounter=0;
             break;
 
         case 'r': //Enable/Disable auto rotation
@@ -240,7 +263,7 @@ int main(int argc, char *argv[])
     glutInitWindowSize(1280,720);
     glutInitWindowPosition(200,200);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-    glutCreateWindow("17201012");
+    glutCreateWindow("17201046");
     glutReshapeFunc(resize);
     glutDisplayFunc(display);
     glutKeyboardFunc(key);
